@@ -23,17 +23,17 @@ const updateIsModalOpen = (newValue: boolean) => {
 
 </script>
 <template>
-  <div class="w-full h-full flex flex-col items-center py-10 px-5 gap-14 relative md:px-14">
+  <div class="w-full h-full flex flex-col items-center py-10 px-5 gap-14 relative md:px-14 xl:max-w-screen-xl">
     <header class="w-full flex flex-col items-center justify-center gap-7">
-      <ComputerIcon class="md:w-16 md:h-16" />
+      <ComputerIcon class="md:w-16 md:h-16 xl:w-20 xl:h-20" />
       <div class="flex flex-col w-full gap-4">
-        <div class="text-center text-xl font-bold md:text-2xl">
+        <div class="text-center text-xl font-bold md:text-2xl xl:text-3xl">
           <p>
             Bem vindo ao seu
           </p>
           <span class="bg-primary p-1 rounded-lg">Organizador de projetos</span>
         </div>
-        <p class="text-center text-xs text-muted-fg md:text-base">
+        <p class="text-center text-xs text-muted-fg md:text-base xl:text-lg">
           Desenvolveu ou participou de um projeto? Adicione e gerencie aqui!
         </p>
       </div>
@@ -41,13 +41,17 @@ const updateIsModalOpen = (newValue: boolean) => {
     <main class="w-full h-full flex flex-col gap-10">
       <div class="w-full lg:flex gap-10 items-center">
         <input type="text" placeholder="O que deseja procurar?"
-          class="border border-border bg-transparent w-full rounded-lg px-3 py-2 text-sm h-10 outline-none md:py-6 md:text-base">
-        <button class="hidden lg:flex items-center px-3 bg-primary">
+          class="border border-border bg-transparent w-full rounded-lg px-3 py-2 text-sm h-10 outline-none md:py-6 md:text-base xl:text-lg xl:py-7">
+        <button
+          class="hidden lg:flex items-center font-semibold px-3 bg-primary py-3 w-72 rounded-md xl:py-4 xl:text-lg hover:bg-primary/75 transition-colors"
+          @click="isModalOpen = true">
           <OhVueIcon name="md-add" class="size-6" />
-          Adicionar projeto
+          <span class="flex-1">
+            Adicionar projeto
+          </span>
         </button>
       </div>
-      <div class="w-full grid grid-cols-1 gap-7">
+      <div class="w-full grid grid-cols-1 gap-7 lg:grid-cols-2">
         <ProjectCard />
         <ProjectCard />
         <ProjectCard />
