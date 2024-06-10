@@ -3,7 +3,7 @@ import MoreTiredMenu from '@/components/MoreTiredMenu.vue'
 </script>
 
 <template>
-    <div class="w-full border border-border rounded-md flex flex-col gap-5 px-3 py-5">
+    <div class="w-full border border-border rounded-md flex flex-col gap-5 px-6 py-5">
         <div class="w-full flex flex-col gap-2">
             <div class="flex justify-between w-full items-center">
                 <h3 class="font-bold md:text-lg">
