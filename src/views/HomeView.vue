@@ -4,8 +4,24 @@ import { MdAdd } from "oh-vue-icons/icons";
 import { addIcons, OhVueIcon } from "oh-vue-icons";
 import { defineComponent } from "vue";
 import ProjectCard from '@/components/ProjectCard.vue'
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import DialogProjectForm from '@/components/DialogProjectForm.vue';
+import Toast from 'primevue/toast';
+import api from '@/services/api';
+import { useToast } from 'primevue/usetoast';
+
+export interface IProject {
+  id: string;
+  projectName: string;
+  role: string;
+  tech: string;
+  initialDate: Date;
+  finalDate?: Date;
+  hours: number;
+  link?: string;
+  description: string;
+  status: string;
+}
 
 addIcons(MdAdd);
 
@@ -21,9 +37,24 @@ const updateIsModalOpen = (newValue: boolean) => {
   isModalOpen.value = newValue;
 };
 
+const projects = ref<IProject[]>([])
+const toast = useToast();
+
+const getAllProjects = async () => {
+  try {
+    const response = await api.get('/projects');
+    projects.value = response.data;
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar projetos' });
+  }
+}
+
+onMounted(getAllProjects);
+
 </script>
 <template>
   <div class="w-full h-full flex flex-col items-center py-10 px-5 gap-14 relative md:px-14 xl:max-w-screen-xl">
+    <Toast />
     <header class="w-full flex flex-col items-center justify-center gap-7">
       <ComputerIcon class="md:w-16 md:h-16 xl:w-20 xl:h-20" />
       <div class="flex flex-col w-full gap-4">
@@ -51,11 +82,16 @@ const updateIsModalOpen = (newValue: boolean) => {
           </span>
         </button>
       </div>
-      <div class="w-full grid grid-cols-1 gap-7 lg:grid-cols-2">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+      <div class="w-full grid grid-cols-1 gap-7 lg:grid-cols-2" v-if="projects.length > 0">
+        <ProjectCard v-for="project in projects" :key="project.id" :project="project"
+          :getAllProjects="getAllProjects" />
       </div>
+      <p class="text-muted-fg text-center h-full flex flex-col items-center justify-center gap-3" v-else>
+        <span class="text-3xl">
+          😔
+        </span>
+        Nenhum projeto cadastrado até o momento
+      </p>
       <div class="fixed bottom-3 right-4 lg:hidden">
         <button class="bg-primary p-5 rounded-full flex justify-center items-center" @click="isModalOpen = true">
           <OhVueIcon name="md-add" class="size-6" />

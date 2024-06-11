@@ -3,10 +3,35 @@
 @tailwind utilities;
 
 @layer base {
-  body #app {
+  body {
+    @apply w-full h-screen;
+  }
+
+  #app {
     @apply w-full h-full bg-background text-white flex items-center justify-center;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: #555;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }

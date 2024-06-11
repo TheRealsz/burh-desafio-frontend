@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TieredMenu from 'primevue/tieredmenu';
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import Dialog from 'primevue/dialog';
 import { MdMorevert } from "oh-vue-icons/icons";
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
@@ -8,6 +8,10 @@ import { defineComponent } from "vue";
 import DialogProjectForm from './DialogProjectForm.vue';
 import DialogDeleteProject from './DialogDeleteProject.vue';
 
+
+const props = defineProps({
+    getAllProjects: Function,
+});
 
 addIcons(MdMorevert);
 
@@ -39,6 +43,9 @@ const updateIsModalOpen = (newValue: boolean) => {
     isModalOpen.value = newValue;
 };
 
+const updateIsDeleteModalOpen = (newValue: boolean) => {
+    isDeleteModalOpen.value = newValue;
+};
 
 const isDeleteModalOpen = ref(false);
 const isModalOpen = ref(false);
@@ -60,6 +67,6 @@ const isModalOpen = ref(false);
             </a>
         </template>
     </TieredMenu>
-    <DialogProjectForm :is-modal-open="isModalOpen" :is-edit="true" @update:isModalOpen="updateIsModalOpen" />
-    <DialogDeleteProject :is-delete-modal-open="isDeleteModalOpen" @update:is-modal-open="updateIsModalOpen" />
+    <DialogProjectForm :is-modal-open="isModalOpen" :is-edit="true" @update:isModalOpen="updateIsModalOpen" :getAllProjects="getAllProjects" />
+    <DialogDeleteProject :is-delete-modal-open="isDeleteModalOpen" @update:is-modal-open="updateIsDeleteModalOpen" />
 </template>
