@@ -34,7 +34,8 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 Para instalar o burh-desafio-frontend, siga estas etapas:
 
 1. Copie essa url ao apertar o botão `code`
-   ![alt text](image-1.png)
+
+   <img src="src/assets/gitCloneExample.png" alt="Exemplo git clone">
 
 2. Escolha a pasta que o projeto ficara e em seu terminal, utilize o comando `git clone` seguido da url que voce copiou. Ficara dessa forma:
 
