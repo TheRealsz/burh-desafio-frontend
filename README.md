@@ -18,6 +18,10 @@ Sobre a organização do projeto, foquei em tentar manter da forma mais proxima 
 
 ![alt text](image.png)
 
+## Perfil Burh
+
+Segue o link para meu perfil: [Perfil](https://burh.com.br/RobsonOliveira61)
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
