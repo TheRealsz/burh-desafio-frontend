@@ -25,6 +25,7 @@ const props = defineProps({
     },
     isEdit: Boolean,
     getAllProjects: Function,
+    project: Object
 });
 
 const emits = defineEmits(['update:isModalOpen', 'close']);
@@ -46,7 +47,6 @@ const closeModal = () => {
 
 const toast = useToast();
 
-
 const projectFormSchema = yup.object({
     projectName: yup.string().required("Nome do projeto é obrigatório").min(3, "Nome do projeto deve ter no mínimo 3 caracteres"),
     role: yup.string().required("Função principal é obrigatória").min(3, "Função principal deve ter no mínimo 3 caracteres"),
@@ -63,22 +63,19 @@ const projectFormSchema = yup.object({
 });
 
 const submitForm = async (values: IProjectFormValues) => {
-
     const valuesFormatted = {
         ...values,
         status: status.value
     };
-
     try {
-        const response = await api.post('/projects', values);
-        console.log(response)
+        await api.post('/projects', valuesFormatted);
         toast.add({ severity: 'success', summary: 'Projeto cadastrado com sucesso', life: 3000 });
         props.getAllProjects?.();
-        closeModal();
     } catch (error) {
         console.error(error);
         toast.add({ severity: 'error', summary: 'Erro ao cadastrar projeto', life: 3000 });
     }
+    closeModal();
 };
 
 const status = ref(false);

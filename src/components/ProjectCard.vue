@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 import MoreTiredMenu from '@/components/MoreTiredMenu.vue'
 import type { IProject } from '@/views/HomeView.vue'
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 defineProps<{
@@ -28,7 +28,7 @@ const formatDate = (dateValue: Date) => {
                     {{ project.projectName }}
                 </h3>
                 <div class="card flex justify-center">
-                    <MoreTiredMenu :getAllProjects="getAllProjects" />
+                    <MoreTiredMenu :getAllProjects="getAllProjects" :project="project" />
                 </div>
             </div>
             <div class="w-full flex gap-1 flex-wrap text-xs">
@@ -40,7 +40,7 @@ const formatDate = (dateValue: Date) => {
                 </div>
             </div>
         </div>
-        <div>
+        <div class="flex-1">
             <p class="text-sm md:text-base">
                 {{ project.description }}
             </p>

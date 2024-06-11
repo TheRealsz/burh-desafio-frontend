@@ -7,11 +7,13 @@ import { OhVueIcon, addIcons } from 'oh-vue-icons';
 import { defineComponent } from "vue";
 import DialogProjectForm from './DialogProjectForm.vue';
 import DialogDeleteProject from './DialogDeleteProject.vue';
+import type { IProject } from '@/views/HomeView.vue';
 
-
-const props = defineProps({
+defineProps<{
+    project: IProject,
     getAllProjects: Function,
-});
+}>();
+
 
 addIcons(MdMorevert);
 
@@ -67,6 +69,9 @@ const isModalOpen = ref(false);
             </a>
         </template>
     </TieredMenu>
-    <DialogProjectForm :is-modal-open="isModalOpen" :is-edit="true" @update:isModalOpen="updateIsModalOpen" :getAllProjects="getAllProjects" />
-    <DialogDeleteProject :is-delete-modal-open="isDeleteModalOpen" @update:is-modal-open="updateIsDeleteModalOpen" />
+    <DialogProjectForm :get-all-projects="getAllProjects" :is-modal-open="isModalOpen" :is-edit="true"
+        @update:isModalOpen="updateIsModalOpen" :project="project" />
+    <DialogDeleteProject :is-delete-modal-open="isDeleteModalOpen"
+        @update:is-delete-modal-open="updateIsDeleteModalOpen" :project-id="project._id"
+        :get-all-projects="getAllProjects" />
 </template>

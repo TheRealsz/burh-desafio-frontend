@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply w-full h-screen;
+    @apply w-full h-screen bg-background;
   }
 
   #app {
-    @apply w-full h-full bg-background text-white flex items-center justify-center;
+    @apply w-full h-full text-white flex items-center justify-center;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;

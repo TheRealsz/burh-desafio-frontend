@@ -11,7 +11,7 @@ import api from '@/services/api';
 import { useToast } from 'primevue/usetoast';
 
 export interface IProject {
-  id: string;
+  _id: string;
   projectName: string;
   role: string;
   tech: string;
@@ -49,7 +49,9 @@ const getAllProjects = async () => {
   }
 }
 
-onMounted(getAllProjects);
+onMounted(() => {
+  getAllProjects();
+});
 
 </script>
 <template>
@@ -82,8 +84,8 @@ onMounted(getAllProjects);
           </span>
         </button>
       </div>
-      <div class="w-full grid grid-cols-1 gap-7 lg:grid-cols-2" v-if="projects.length > 0">
-        <ProjectCard v-for="project in projects" :key="project.id" :project="project"
+      <div class="w-full mb-5 grid grid-cols-1 gap-7 lg:grid-cols-2" v-if="projects.length > 0">
+        <ProjectCard v-for="project in projects" :key="project._id" :project="project"
           :getAllProjects="getAllProjects" />
       </div>
       <p class="text-muted-fg text-center h-full flex flex-col items-center justify-center gap-3" v-else>
@@ -96,7 +98,8 @@ onMounted(getAllProjects);
         <button class="bg-primary p-5 rounded-full flex justify-center items-center" @click="isModalOpen = true">
           <OhVueIcon name="md-add" class="size-6" />
         </button>
-        <DialogProjectForm :is-modal-open="isModalOpen" :is-edit="false" @update:isModalOpen="updateIsModalOpen" />
+        <DialogProjectForm :is-modal-open="isModalOpen" :is-edit="false" @update:isModalOpen="updateIsModalOpen"
+          :get-all-projects="getAllProjects" />
       </div>
     </main>
   </div>
