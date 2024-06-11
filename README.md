@@ -16,7 +16,7 @@ Implementei um design responsivo com o conceito de mobile first, tratei erros e 
 
 Sobre a organização do projeto, foquei em tentar manter da forma mais proxima do que trabalho no React, tendo a unica diferença a organizaçao dos componentes. Como é um projeto mais simples e pequeno, joguei os componentes tudo dentro da pasta `components`, em situações de projetos maiores, costumo verificar primeiramente se o componente tem escopo global ou local, caso seja global, crio uma pasta dentro de `components` com o nome do componente e o crio no arquivo principal (caso haja mais componentes dentro dele, crio subpastas para melhor organiza-los), e caso seja local, crio dentro da pasta da `page` uma pasta `components` e nela organizo os componentes locais especificos daquelas pagina. A outra pasta extra que criei foi a de `services` que foi onde criei a instancia do `axios` e fiz as configurações basicas.
 
-![alt text](image.png)
+<img src="src/assets/projectOrganization.png" alt="Organização do projeto">
 
 ## Perfil Burh
 
