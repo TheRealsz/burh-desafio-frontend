@@ -62,7 +62,37 @@ const projectFormSchema = yup.object({
     status: yup.boolean().default(false)
 });
 
+const validateDate = (values: IProjectFormValues) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0)
+    const initialDate = new Date(values.initialDate);
+    const finalDate = values.finalDate ? new Date(values.finalDate) : null;
+
+    if (initialDate > today) {
+        toast.add({ severity: 'error', summary: 'Erro ao cadastrar projeto', detail: 'Data inicial não pode ser maior que a data atual', life: 3000 });
+        return;
+    }
+
+    if (finalDate) {
+        if (finalDate > today) {
+            toast.add({ severity: 'error', summary: 'Erro ao cadastrar projeto', detail: 'Data final não pode ser maior que a data atual', life: 3000 });
+            return;
+        }
+        if (finalDate < initialDate) {
+            toast.add({ severity: 'error', summary: 'Erro ao cadastrar projeto', detail: 'Data final não pode ser menor que a data inicial', life: 3000 });
+            return;
+        }
+    }
+};
+
+
 const submitForm = async (values: IProjectFormValues) => {
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0)
+
+    validateDate(values);
+
     const valuesFormatted = {
         ...values,
         status: status.value
